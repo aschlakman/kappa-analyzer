@@ -21,7 +21,7 @@ def create_binary_scale(classification_matrix: List[List[int]]):
 if __name__ == '__main__':
     db_files = [
         r"C:\Code\seminar\results_db\storage_yaara.db",
-        # r"C:\Code\seminar\results_db\storageMerav.db",
+        r"C:\Code\seminar\results_db\storageMerav.db",
         r"C:\Code\seminar\results_db\storageAri.db"
     ]
     classification_matrix = get_aggregated_classification(db_files)
