@@ -73,6 +73,30 @@ def get_aggregated_classification(db_file_names: List[str]):
     return classification_matrix
 
 
+def get_rater_classifications(db_file_names: List[str]) -> List[List[int]]:
+    file_to_categorized_images = dict()
+    categories = set()
+
+    for db_file_path in db_file_names:
+        categories.update(get_categories(db_file_path))
+        image_to_category = get_image_to_category(db_file_path)
+        file_to_categorized_images[db_file_path] = image_to_category
+
+    category_to_index = get_indexed_categories(categories)
+
+    all_raters_classifications: List[List[int]] = []
+    for db_file, categorized_images in file_to_categorized_images.items():
+
+        rater_classifications: List[int] = []
+
+        for image_name, category_name in categorized_images.items():
+            rater_classifications.append(category_to_index[category_name])
+
+        all_raters_classifications.append(rater_classifications)
+
+    return all_raters_classifications
+
+
 if __name__ == '__main__':
     db_files = [
         r"C:\Code\seminar\results_db\storage_yaara.db",
